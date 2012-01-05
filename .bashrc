@@ -26,14 +26,6 @@ if [ -f ~/.variables ]; then
 	. ~/.variables
 fi
 
-if [ -f /etc/bash_completion.d/matsrunner ]; then
-	. /etc/bash_completion.d/matsrunner 
-fi
-
-if [ -f  /etc/bash_completion.d/matsrunner2html ]; then
-	. /etc/bash_completion.d/matsrunner2html
-fi
-
 # Expand the environment
 # User specific environment and startup programs
 PATH=$PATH:${HOME}/bin
