@@ -1,0 +1,182 @@
+# Environment functions 
+
+# Start, stop and restart mb- services
+function startmb () {
+	cd ${WIS_PERL5LIB}
+	cd ..
+	(ps aux|grep -q [m]b-dispatcher) && \
+		echo "mb-dispatcher is running already" || \
+		bin/mb-dispatcher start
+
+	(ps aux|grep -q [m]b-robot) && \
+		echo "mb-robot is running already" || \
+		bin/mb-robot start
+
+	(ps aux|grep -q [m]b-scanner) && \
+		echo "mb-scanner is running already" || \
+		bin/mb-scanner start
+}
+
+function stopmb () {
+	cd ${WIS_PERL5LIB}
+	cd ..
+	bin/mb-dispatcher stop && echo "mb-dispatcher stopped"
+	bin/mb-robot      stop && echo "mb-robot      stopped"
+	bin/mb-scanner    stop && echo "mb-scanner    stopped"
+}
+
+function restartmb () {
+	stopmb
+	startmb
+}
+
+function statusmb () {
+	cd ${WIS_PERL5LIB}
+	cd ..
+	bin/mb-dispatcher status
+	bin/mb-robot      status
+	bin/mb-scanner    status
+}
+
+# Search the pstree
+function pt () {
+	declare search="${*}"
+	pstree -paGh | ack ${search}
+}
+
+# Search the history
+function ghistory () {
+    var=$(history | ack $1 | wc -l)
+	if (( $var > 22 )); then
+		history | ack $1 | less
+	else
+		history | ack $1
+	fi
+}
+
+# Save file deletion. 
+function del () {
+	declare target="${1}"
+	
+	/bin/cp -R ${target} ~/.Trash/ && /bin/rm -f ${target} 
+}
+
+# Improved grep. Short version.
+function lookfor () {
+	declare regexp="${1}"
+	declare   path="${2}"
+
+	/bin/grep --recursive                  \
+              --line-number                \
+		      --color=always               \
+              --binary-files=without-match \
+              --perl-regexp "${regexp}"    \
+              ${path:=.} | grep -v '.svn'
+}	
+
+# Convert ascii string to SNMP OID address
+function ascii2oid () {
+	declare string=${1}
+	declare length=${#string}
+	declare newstring
+
+	declare -a ascii2dec=( $(echo ${string}|sed -n 's/\(.\)/ \1/gp') )
+
+	for elem in ${ascii2dec[@]}; do
+		newstring="${newstring}$(printf ".%d" \"${elem}\")"
+	done
+	echo "${length}${newstring}"
+}
+
+function oid2ascii () {
+	declare oid=${1}
+	declare -a string=( $(echo ${oid//./ }) )
+	declare ascii
+
+	for i in ${string[@]}; do
+		declare temp=$( perl -e 'print pack("C*",'${i}')' )
+		ascii="${ascii}${temp}"
+	done
+
+	echo ${ascii}
+}
+
+function swalk () {
+	declare  tag="${1}"
+	declare   ip="${2}"
+	declare prog="${3}"
+
+	if [ -z "${tag}" ]; then
+		echo "USAGE: swalk <tag> <ip|1> [<prog>]"
+		return
+	fi
+
+	if [[ "X${ip}" = "X1" ]]; then
+		ip=172.20.12.114
+	fi
+
+	if [ -n "${prog}" ]; then
+		prog=".$( ascii2oid ${prog} )"
+	else
+		prog=''
+	fi
+
+	snmpwalk -v 2c -OQ -c public ${ip} ${tag}${prog} 2>/dev/null
+	return $?
+}
+
+function autossh () {
+	declare ip="${1}"
+
+	if [ -z "${ip}" ]; then
+		echo "Missing IP address"
+		return
+	fi
+
+	if [ ! -e ~/.ssh/id_rsa.pub ]; then
+		ssh-keygen -t rsa
+	fi
+
+	echo "No copy your key to the end of ~/.ssh/authorized_keys on ${ip}"
+	cat ~/.ssh/id_rsa.pub
+	ssh -l bbndserviceaccount ${ip}
+}
+
+# Locate dependency of Perl modules
+function find-perl-module-use () {
+	declare dir=${1:-lib}
+
+	ack '^\s*use\s+.*;\s*$' ${dir} | \
+	awk '{ print $2 }'             | \
+	sed 's/();\?$\|;$//'           | \
+	sort                           | \
+	uniq
+
+	ack '^\s*use\s+base\s+.*;\s*$' ${dir} | \
+	awk '{ print $3 }'                    | \
+	sed 's/();\?$\|;$//'                  | \
+	sort                                  | \
+	uniq
+}
+
+function wcopy () {
+	declare path=${1}
+	declare file=$( basename ${path} )
+
+	echo "scp ${path} wis@www.quttera.com:~/wis/${path}"
+	scp ${path} wis@www.quttera.com:~/wis/${path}
+}
+
+function cget () {
+	declare path=${1}
+	declare view=${2}
+	declare header="Content-type: application/json"
+	declare address="http://localhost:17670"
+
+	if [[ 'x${view}' != "x" ]]; then
+		path="${path}/_design/couchapp/_view/${view}"
+	fi
+	curl -s ${header} ${address}${path}
+}
+
+# vim ts=4 sw=4 syn=sh :

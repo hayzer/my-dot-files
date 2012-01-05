@@ -1,0 +1,36 @@
+alias rm='/bin/rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+alias -- +='pushd ${*}'
+alias -- -='popd'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias dir='ls -l'
+alias l='ls -alF --color=tty'
+alias l.='ls .[a-zA-Z0-9]* --color=auto'
+alias la='ls -la --color=tty'
+alias ll='ls -l --color=tty'
+alias ls='/bin/ls $LS_OPTIONS -p --color=tty'
+alias ls-l='ls -l'
+alias o='less -N'
+alias c='cat -n'
+alias unmount='echo "Should be: umount" 1>&2; false'
+alias p='pwd'
+alias v='vim'
+alias vi='vim'
+alias modver="perl -le '\$m=shift;eval qq(require \$m) or die qq(module \"\$m\" is not installed\\n);print \$m->VERSION'"
+alias mysqllist="mysql -u quttera -pquttera -D quttera -e \"show tables\""
+alias kill="sudo kill"
+alias pkill="sudo pkill"
+alias diff="colordiff"
+alias michal="ssh michal@michal"
+alias t="tree"
+alias sshw='ssh wis@www.quttera.com'
+alias sshr='ssh root@www.quttera.com'
+
+alias pt='pstree -paGh | grep -v '/usr/bin/ack' | ack -i --pager=less'
+alias tt='/usr/bin/time -f %E'
+alias cdwis='cd /home/hayzer/quttera_sources/web/wis/'
+
+# vim ts=4 sw=4 syn=sh :
