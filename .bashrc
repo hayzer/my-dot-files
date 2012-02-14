@@ -1,4 +1,9 @@
-# .bashrc
+# /etc/skel/.bashrc:
+#
+# This file is sourced by all *interactive* bash shells on startup,
+# including some apparently interactive shells such as scp and rcp
+# that can't tolerate any output.  So make sure this doesn't display
+# anything or bad things will happen !
 
 # User specific aliases and functions
 # Source global definitions
@@ -6,8 +11,12 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
-if [ -f /etc/profile.d/mats.sh ]; then
-	. /etc/profile.d/mats.sh
+# Test for an interactive shell.  There is no need to set anything
+# past this point for scp and rcp, and it's important to refrain from
+# outputting anything in those cases.
+if [[ $- != *i* ]] ; then
+	# Shell is non-interactive.  Be done now!
+	return
 fi
 
 if [ -f ~/.aliases ]; then
@@ -26,12 +35,16 @@ if [ -f ~/.variables ]; then
 	. ~/.variables
 fi
 
-if [ -f /etc/bash_completion.d/matsrunner ]; then
-	. /etc/bash_completion.d/matsrunner 
+# Add-on for comfortable CouchDB command line
+if [ -f ~/test/resty ]; then
+	. ~/test/resty
 fi
 
-if [ -f  /etc/bash_completion.d/matsrunner2html ]; then
-	. /etc/bash_completion.d/matsrunner2html
+# Put your fun stuff here.
+ if [ ${BASH_VERSINFO[0]} -lt 3 ]; then
+	export PS4='>[ ${0}:${LINENO}: ${FUNCNAME[0]} ] '
+else
+	export PS4='>[ ${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]} ] '
 fi
 
 # Expand the environment
