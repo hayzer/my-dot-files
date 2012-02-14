@@ -1,42 +1,5 @@
 # Environment functions 
 
-# Start, stop and restart mb- services
-function startmb () {
-	cd ${WIS_PERL5LIB}
-	cd ..
-	(ps aux|grep -q [m]b-dispatcher) && \
-		echo "mb-dispatcher is running already" || \
-		bin/mb-dispatcher start
-
-	(ps aux|grep -q [m]b-robot) && \
-		echo "mb-robot is running already" || \
-		bin/mb-robot start
-
-	(ps aux|grep -q [m]b-scanner) && \
-		echo "mb-scanner is running already" || \
-		bin/mb-scanner start
-}
-
-function stopmb () {
-	cd ${WIS_PERL5LIB}
-	cd ..
-	bin/mb-dispatcher stop && echo "mb-dispatcher stopped"
-	bin/mb-robot      stop && echo "mb-robot      stopped"
-	bin/mb-scanner    stop && echo "mb-scanner    stopped"
-}
-
-function restartmb () {
-	stopmb
-	startmb
-}
-
-function statusmb () {
-	cd ${WIS_PERL5LIB}
-	cd ..
-	bin/mb-dispatcher status
-	bin/mb-robot      status
-	bin/mb-scanner    status
-}
 
 # Search the pstree
 function pt () {
