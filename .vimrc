@@ -11,8 +11,10 @@ set backspace=indent,eol,start
 syntax on
 
 " Folding
-set foldmethod=manual
-set foldcolumn=5
+if has("foldmethod")
+	set foldmethod=manual
+	set foldcolumn=5
+endif
 
 " Add ':' to the naitve keyword.
 " This way double-colons should be autocomplete
@@ -59,6 +61,8 @@ set nowrap
 " Show whitelist
 set list
 set listchars=tab:>.,trail:.,extends:#,nbsp:.
+" And cancel it when no need it
+map <F8> :set nolist<CR>
 
 " Don't show whitelis for given types
 autocmd filetype html,xml,pl set listchars-=tab:>.
