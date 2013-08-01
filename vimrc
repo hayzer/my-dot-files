@@ -35,8 +35,6 @@ filetype plugin on
 " Set jumps to search word as you type
 set incsearch
 
-source ~/.vim/plugin/manpageview.vim
-
 " Change default indend width
 set tabstop=4
 set autoindent
