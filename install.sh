@@ -8,10 +8,9 @@ source=my-dot-files.tar.gz
 	curl -s -L -o ${source} http://github.com/hayzer/my-dot-files/tarball/master
 	echo \* Opening archive..
 	tar zxf ${source}
-	echo \* Doing something..
+	echo \* Update bash environment
 	cd hayzer-*/
 	for file in $(find bash/ -type f); do
-		echo \* cp ${file} ${home}/.${file#bash/}
 		cp ${file} ${home}/.${file#bash/}
 	done
 	echo \* Update vim configuration
