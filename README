@@ -1,5 +1,4 @@
-Copy the files into your home directory
-Add to the original name prefix "." (dot)
-Validate that bash-completion for git is installed
-and sources, other way you will see an error
-about '__git_ps1'
+* How to install
+
+  # curl -s -L http://bit.ly/1mq6AJr | bash -
+
