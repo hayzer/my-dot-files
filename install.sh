@@ -14,6 +14,9 @@ source=my-dot-files.tar.gz
 		echo \* cp ${file} ${home}/.${file#bash/}
 		cp ${file} ${home}/.${file#bash/}
 	done
+	echo \* Update vim configuration
+	mkdir -p ${home}/.vim/colors
+	cp -r vim/vim_colors/* ${home}/.vim/colors/
 	cd - > /dev/null
 	echo \* Clean the sources..
 	rm -fr hayzer-*/ ${source}
