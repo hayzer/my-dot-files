@@ -1,5 +1,4 @@
 # install my dot files locally
-set +x
 home=${HOME}
 source=my-dot-files.tar.gz
 
@@ -18,5 +17,3 @@ source=my-dot-files.tar.gz
 	echo \* Clean the sources..
 	rm -fr hayzer-*/ ${source}
 )
-
-set -x
