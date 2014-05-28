@@ -10,8 +10,8 @@ source=my-dot-files.tar.gz
 	tar zxf ${source}
 	echo \* Doing something..
 	cd hayzer-*/
-	for file in $(find bash/); do
-		echo ${file}
+	for file in $(find bash/ -type f); do
+		echo cp ${file} ~/.${file#bash/}
 	done
 	cd -
 	echo \* Clean the sources..
