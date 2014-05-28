@@ -11,9 +11,10 @@ source=my-dot-files.tar.gz
 	echo \* Doing something..
 	cd hayzer-*/
 	for file in $(find bash/ -type f); do
-		echo cp ${file} ~/.${file#bash/}
+		echo \* cp ${file} ${home}/.${file#bash/}
+		cp ${file} ${home}/.${file#bash/}
 	done
-	cd -
+	cd - > /dev/null
 	echo \* Clean the sources..
 	rm -fr hayzer-*/ ${source}
 )
