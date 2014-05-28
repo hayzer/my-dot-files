@@ -10,9 +10,9 @@ source=my-dot-files.tar.gz
 	tar zxf ${source}
 	echo \* Doing something..
 	cd hayzer-*/
-	path=$(pwd)
-	echo \* The path is ${path}
-	ls -la
+	for file in $(find bash/); do
+		echo ${file}
+	done
 	cd -
 	echo \* Clean the sources..
 	rm -fr hayzer-*/ ${source}
