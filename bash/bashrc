@@ -47,11 +47,6 @@ else
 	export PS4='>[ ${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]} ] '
 fi
 
-# Expand the environment
-# User specific environment and startup programs
-PATH=$PATH:${HOME}/bin
-export PATH
-
 # Keep the history save
 shopt -s histappend
 
