@@ -7,7 +7,13 @@
 
 #### Installation
 
-<pre><code>
+```bash
   # curl -s -L http://bit.ly/1mq6AJr | bash -
-</pre></code>
+```
+
+#### Install Janus
+
+```bash
+  # curl -Lo- https://bit.ly/janus-bootstrap | bash
+```
 
