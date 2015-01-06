@@ -12,6 +12,8 @@
   # curl -s -L http://bit.ly/1mq6AJr | bash -
 ```
 
+#### Restart bash
+
 #### Install Janus
 
 ```bash
