@@ -4,6 +4,7 @@
 
 * yum install perl-local-lib
 * yum install bash-completion
+* yum install rubygem-rake
 
 #### Installation
 
@@ -14,6 +15,6 @@
 #### Install Janus
 
 ```bash
-  # curl -Lo- https://bit.ly/janus-bootstrap | bash
+  # curl -s -L https://bit.ly/janus-bootstrap | bash -
 ```
 
