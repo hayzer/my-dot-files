@@ -1,4 +1,7 @@
 # Environment local variables
+if [ -f ~/.local_variables ]; then
+	. ~/.local_variables
+fi
 
 # Quttera
 export WIS_PERL5LIB=/home/hayzer/quttera_sources/web/wis/lib/
