@@ -19,6 +19,10 @@ if [[ $- != *i* ]] ; then
 	return
 fi
 
+if [ -f ~/.prompt-colors ]; then
+	. ~/.prompt-colors
+fi
+
 if [ -f ~/.aliases ]; then
 	. ~/.aliases
 fi
@@ -59,4 +63,5 @@ GIT_EDITOR=vim
 eval $(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)
 
 # git prompt
+source ~/.git-prompt
 source ~/.bash_prompt
