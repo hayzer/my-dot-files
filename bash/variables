@@ -7,6 +7,8 @@ fi
 export WIS_PERL5LIB=/home/hayzer/quttera_sources/web/wis/lib/
 export WIS_LIB=/home/hayzer/quttera_sources/web/wis
 
+export EDITOR=vim
+
 ######
 # Fix history
 export HISTSIZE="5000"
