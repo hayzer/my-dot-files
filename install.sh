@@ -1,22 +1,36 @@
 # install my dot files locally
-home=${HOME}
-source=my-dot-files.tar.gz
+SOURCE=my-dot-files.tar.gz
+
+function msg () {
+   echo \* $1
+}
+
+# Backup old environment
+msg "Backup old environment"
+if [ -e ${HOME}/.bashrc ]; then
+    mv ${HOME}/.bashrc ${HOME}/.OLD_BASHRC
+fi
+
+if [ -e ${HOME}/.bash_profile ]; then
+    mv ${HOME}/.bash_profile ${HOME}/.OLD_BASH_PROFILE
+fi
+
+if [ -e ${HOME}/.profile ]; then
+    mv ${HOME}/.profile ${HOME}/.PROFILE
+fi
 
 (
 	cd /tmp
-	echo \* Downloading..
-	curl -s -L -o ${source} http://github.com/hayzer/my-dot-files/tarball/master
-	echo \* Opening archive..
-	tar zxf ${source}
-	echo \* Update bash environment
+	msg "Downloading dot files"
+	curl -s -L -o ${SOURCE} http://github.com/hayzer/my-dot-files/tarball/master
+	msg "Opening archive"
+	tar zxf ${SOURCE}
+	msg "Update bash environment"
 	cd hayzer-*/
 	for file in $(find bash/ -type f); do
-		cp ${file} ${home}/.${file#bash/}
+		cp ${file} ${HOME}/.${file#bash/}
 	done
-	echo \* Update vim configuration
-	mkdir -p ${home}/.vim/colors
-	cp -r vim/vim_colors/* ${home}/.vim/colors/
-	cd - > /dev/null
-	echo \* Clean the sources..
-	rm -fr hayzer-*/ ${source}
+	msg "Clean the sources"
+	rm -fr hayzer-*/ ${SOURCE}
 )
+exit 0
