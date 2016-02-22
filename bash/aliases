@@ -1,3 +1,7 @@
+if [ -f ~/.local_aliases ]; then
+    . ~/.local_aliases
+fi
+
 alias rm='/bin/rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
@@ -26,14 +30,13 @@ alias pkill="sudo pkill"
 alias diff="colordiff"
 alias t="tree"
 alias vas='vim ~/.aliases'
-alias sshw='ssh wis@www.quttera.com'
-alias sshr='ssh root@www.quttera.com'
 alias pt='pstree -paGh | grep -v '/usr/bin/ack' | ack -i --pager=less'
 alias tt='/usr/bin/time -f %E'
 alias cdwis='cd /home/hayzer/quttera_sources/web/wis/'
 alias pj='python -mjson.tool'
 alias nst='netstat -tlupn|ack '
 alias env_update='curl -s -L http://bit.ly/1mq6AJr | bash -'
+alias gigraph='git log --graph --oneline'
 
 # Git 
 alias gist='git status'
