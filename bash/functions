@@ -185,6 +185,10 @@ function ex () {
       *.zip)       unzip $1     ;;
       *.Z)         uncompress $1  ;;
       *.7z)        7z x $1    ;;
+      *.xz)        
+            xz -d $1
+            tar -xf ${1##.xz}
+            ;;
       *)           echo "'$1' cannot be extracted via extract()" ;;
     esac
   else
