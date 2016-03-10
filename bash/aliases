@@ -30,7 +30,6 @@ alias pkill="sudo pkill"
 alias diff="colordiff"
 alias t="tree"
 alias vas='vim ~/.aliases'
-alias pt='pstree -paGh | grep -v '/usr/bin/ack' | ack -i --pager=less'
 alias tt='/usr/bin/time -f %E'
 alias cdwis='cd /home/hayzer/quttera_sources/web/wis/'
 alias pj='python -mjson.tool'

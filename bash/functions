@@ -6,20 +6,32 @@ if [ -e ~/.local_functions ]; then
   source ~/.local_functions
 fi
 
+function _searcher() {
+    if which ag;then
+        true
+    elif which ack;then
+        true
+    else
+        which grep
+    fi
+}
 
 # Search the pstree
 function pt () {
 	declare search="${*}"
-	pstree -paGh | ack ${search}
+	declare s=$(_searcher)
+	echo "[$s]"
+	pstree -paGh | ${s} ${search}
 }
 
 # Search the history
 function ghistory () {
-    var=$(history | ack $1 | wc -l)
+    declare s=$(_searcher)
+    var=$(history | ${s} $1 | wc -l)
 	if (( $var > 22 )); then
-		history | ack $1 | less
+		history | ${s} $1 | less
 	else
-		history | ack $1
+		history | ${s} $1
 	fi
 }
 
@@ -114,14 +126,15 @@ function autossh () {
 # Locate dependency of Perl modules
 function find-perl-module-use () {
 	declare dir=${1:-lib}
+	declare s=$(_searcher)
 
-	ack '^\s*use\s+.*;\s*$' ${dir} | \
+	${s} '^\s*use\s+.*;\s*$' ${dir} | \
 	awk '{ print $2 }'             | \
 	sed 's/();\?$\|;$//'           | \
 	sort                           | \
 	uniq
 
-	ack '^\s*use\s+base\s+.*;\s*$' ${dir} | \
+	${s} '^\s*use\s+base\s+.*;\s*$' ${dir} | \
 	awk '{ print $3 }'                    | \
 	sed 's/();\?$\|;$//'                  | \
 	sort                                  | \
