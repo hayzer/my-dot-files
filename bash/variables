@@ -11,10 +11,11 @@ export EDITOR=vim
 
 ######
 # Fix history
-export HISTSIZE="5000"
+export HISTSIZE=-1
+export HISTFILESIZE=-1
 
 # Ignore spamming
-export HISTIGNORE="cd:ls:[bf]g:clear:exit"
+export HISTIGNORE="ls:[bf]g:clear:exit:shutdown"
 
 # Ignore duplicates
 export HISTCONTROL="ignoredups"
