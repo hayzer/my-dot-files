@@ -3,10 +3,6 @@ if [ -f ~/.local_variables ]; then
 	. ~/.local_variables
 fi
 
-# Quttera
-export WIS_PERL5LIB=/home/hayzer/quttera_sources/web/wis/lib/
-export WIS_LIB=/home/hayzer/quttera_sources/web/wis
-
 export EDITOR=vim
 
 ######
@@ -22,3 +18,8 @@ export HISTCONTROL="ignoredups"
 
 # Add time to the history output
 export HISTTIMEFORMAT="%D %R: "
+
+# Go
+GOPATH=${HOME}/go
+GOROOT=/usr/local/go
+GOBIN=${HOME}/go/bin
