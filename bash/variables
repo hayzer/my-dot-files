@@ -20,6 +20,6 @@ export HISTCONTROL="ignoredups"
 export HISTTIMEFORMAT="%D %R: "
 
 # Go
-GOPATH=${HOME}/go
-GOROOT=/usr/local/go
-GOBIN=${HOME}/go/bin
+export GOPATH=${HOME}/go
+export GOROOT=/usr/local/go
+export GOBIN=${HOME}/go/bin
