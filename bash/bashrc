@@ -65,3 +65,8 @@ eval $(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)
 # git prompt
 source ~/.git-prompt
 source ~/.bash_prompt
+
+# Virtualenvwrapper init
+if [ -f /usr/bin/virtualenvwrapper.sh ]; then
+    source /usr/bin/virtualenvwrapper.sh
+fi

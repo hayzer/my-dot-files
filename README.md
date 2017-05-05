@@ -2,8 +2,8 @@
 
 #### Prerequisites
 
-* yum install perl-local-lib
-* yum install bash-completion
+* sudo dnf install perl-CPAN
+* sudo dnf install bash-completion
 
 #### Installation
 
