@@ -82,47 +82,6 @@ function oid2ascii () {
 	echo ${ascii}
 }
 
-function swalk () {
-	declare  tag="${1}"
-	declare   ip="${2}"
-	declare prog="${3}"
-
-	if [ -z "${tag}" ]; then
-		echo "USAGE: swalk <tag> <ip|1> [<prog>]"
-		return
-	fi
-
-	if [[ "X${ip}" = "X1" ]]; then
-		ip=172.20.12.114
-	fi
-
-	if [ -n "${prog}" ]; then
-		prog=".$( ascii2oid ${prog} )"
-	else
-		prog=''
-	fi
-
-	snmpwalk -v 2c -OQ -c public ${ip} ${tag}${prog} 2>/dev/null
-	return $?
-}
-
-function autossh () {
-	declare ip="${1}"
-
-	if [ -z "${ip}" ]; then
-		echo "Missing IP address"
-		return
-	fi
-
-	if [ ! -e ~/.ssh/id_rsa.pub ]; then
-		ssh-keygen -t rsa
-	fi
-
-	echo "No copy your key to the end of ~/.ssh/authorized_keys on ${ip}"
-	cat ~/.ssh/id_rsa.pub
-	ssh -l bbndserviceaccount ${ip}
-}
-
 # Locate dependency of Perl modules
 function find-perl-module-use () {
 	declare dir=${1:-lib}
@@ -141,25 +100,6 @@ function find-perl-module-use () {
 	uniq
 }
 
-function wcopy () {
-	declare path=${1}
-	declare file=$( basename ${path} )
-
-	echo "scp ${path} wis@www.quttera.com:~/wis/${path}"
-	scp ${path} wis@www.quttera.com:~/wis/${path}
-}
-
-function cget () {
-	declare path=${1}
-	declare view=${2}
-	declare header="Content-type: application/json"
-	declare address="http://localhost:17670"
-
-	if [[ 'x${view}' != "x" ]]; then
-		path="${path}/_design/couchapp/_view/${view}"
-	fi
-	curl -s ${header} ${address}${path}
-}
 
 function google () {
 	u=`perl -MURI::Escape -wle 'print "http://google.com/search?q=".
@@ -187,17 +127,17 @@ function gilo () {
 function ex () {
   if [ -f $1 ] ; then
     case $1 in
-      *.tar.bz2)   tar xjvf $1        ;;
-      *.tar.gz)    tar xzvf $1     ;;
-      *.bz2)       bunzip2 $1       ;;
-      *.rar)       rar x $1     ;;
-      *.gz)        gunzip $1     ;;
-      *.tar)       tar xf $1        ;;
-      *.tbz2)      tar xjf $1      ;;
-      *.tgz)       tar xzf $1       ;;
-      *.zip)       unzip $1     ;;
-      *.Z)         uncompress $1  ;;
-      *.7z)        7z x $1    ;;
+      *.tar.bz2)   tar xjvf $1;;
+      *.tar.gz)    tar xzvf $1;;
+      *.bz2)       bunzip2 $1;;
+      *.rar)       rar x $1;;
+      *.gz)        gunzip $1;;
+      *.tar)       tar xf $1;;
+      *.tbz2)      tar xjf $1;;
+      *.tgz)       tar xzf $1;;
+      *.zip)       unzip $1;;
+      *.Z)         uncompress $1;;
+      *.7z)        7z x $1;;
       *.xz)        
             xz -d $1
             tar -xf ${1##.xz}
@@ -207,6 +147,22 @@ function ex () {
   else
     echo "'$1' is not a valid file"
   fi
+}
+
+function update-kubernetes() {
+    URL="https://storage.googleapis.com/kubernetes-release/release"
+    VERSION=$(curl -s ${URL}/stable.txt)
+
+    curl -LO ${URL}/${VERSION}/bin/linux/amd64/kubectl
+
+    chmod +x ./kubectl
+    sudo mv ./kubectl /usr/local/bin/kubectl
+}
+
+function update-minikube() {
+    curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+    chmod +x minikube
+    sudo mv minikube /usr/local/bin/
 }
 
 # vim ts=4 sw=4 syn=sh :

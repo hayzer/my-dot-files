@@ -16,7 +16,7 @@ if [ -e ${HOME}/.bash_profile ]; then
 fi
 
 if [ -e ${HOME}/.profile ]; then
-    mv ${HOME}/.profile ${HOME}/.PROFILE
+    mv ${HOME}/.profile ${HOME}/.OLD_PROFILE
 fi
 
 (
