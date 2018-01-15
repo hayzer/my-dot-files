@@ -38,7 +38,7 @@ alias env_update='curl -s -L http://bit.ly/1mq6AJr | bash -'
 alias gigraph='git log --graph --oneline'
 
 # Git 
-alias gist='git status'
+alias gist='git rev-parse --abbrev-ref HEAD; git status --porcelain'
 alias gici='git commit -v'
 
 # vim ts=4 sw=4 syn=sh :
