@@ -36,9 +36,14 @@ alias pj='python -mjson.tool'
 alias nst='netstat -tlupn|ack '
 alias env_update='curl -s -L http://bit.ly/1mq6AJr | bash -'
 alias gigraph='git log --graph --oneline'
+alias psa='ps aux|ag'
 
 # Git 
-alias gist='git rev-parse --abbrev-ref HEAD; git status --porcelain'
+alias gist='git status'
 alias gici='git commit -v'
 
+# k8s
+alias update-minikube="curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && chmod +x minikube && mv minikube ${HOME}/bin"
+
 # vim ts=4 sw=4 syn=sh :
+alias update-kubectl="curl -LO https://storage.googleapis.com/kubernetes-release/release/\$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x kubectl && mv kubectl ${HOME}/bin/"
