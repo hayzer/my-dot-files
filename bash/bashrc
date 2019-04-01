@@ -67,6 +67,18 @@ source ~/.git-prompt
 source ~/.bash_prompt
 
 # Virtualenvwrapper init
-if [ -f /usr/bin/virtualenvwrapper.sh ]; then
-    source /usr/bin/virtualenvwrapper.sh
+test -f /usr/bin/virtualenvwrapper.sh && source /usr/bin/virtualenvwrapper.sh
+test -f /usr/local/bin/virtualenvwrapper.sh && source /usr/local/bin/virtualenvwrapper.sh
+
+source /etc/bash_completion
+test $(which awless) && source <(awless completion bash)
+
+# Gcloud
+if test -d ${HOME}/tools/google-cloud-sdk; then
+    export PATH=${PATH}:${HOME}/tools/google-cloud-sdk/bin
+    source ~/tools/google-cloud-sdk/completion.bash.inc
 fi
+
+# fzf
+test -f ~/.fzf.bash && source ~/.fzf.bash
+

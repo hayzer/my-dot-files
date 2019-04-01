@@ -21,5 +21,4 @@ export HISTTIMEFORMAT="%D %R: "
 
 # Go
 export GOPATH=${HOME}/go
-export GOROOT=/usr/local/go
 export GOBIN=${HOME}/go/bin
