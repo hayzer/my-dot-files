@@ -164,3 +164,22 @@ function update-minikube () {
     chmod +x minikube
     sudo mv minikube ~/bin/
 }
+
+# Set AWS variables according to the credential profiles
+function aws-set-env () { 
+    declare environment=${1};
+    if [[ "x${environment}" == "x" ]]; then
+        echo "Missin environment name";
+        return;
+    fi;
+    if ! grep -q "${environment}" ~/.aws/*; then
+        echo "Cannot find environment name: ${environment}";
+        return;
+    fi;
+    unset AWS_DEFAULT_REGION;
+    unset AWS_SECRET_ACCESS_KEY;
+    unset AWS_ACCESS_KEY_ID;
+    export AWS_DEFAULT_REGION=$(sed -n '/'${environment}'/,+2p' ~/.aws/config|awk -F= '/region/{gsub(/^[ \t]+|[ \t]+$/, "", $2);print $2}');
+    export $(sed -n '/'${environment}'/,+2p' ~/.aws/credentials |awk '/aws_access/{vv=toupper($1);ff=vv"="$3;print ff}');
+    export $(sed -n '/'${environment}'/,+2p' ~/.aws/credentials |awk '/aws_secret/{vv=toupper($1);ff=vv"="$3;print ff}')
+}
