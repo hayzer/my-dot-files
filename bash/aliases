@@ -44,6 +44,11 @@ alias gici='git commit -v'
 
 # k8s
 alias update-minikube="curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && chmod +x minikube && mv minikube ${HOME}/bin"
+alias update-kubectl="curl -LO https://storage.googleapis.com/kubernetes-release/release/\$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x kubectl && mv kubectl ${HOME}/bin/"
+
+# If bat installed, use it instead of the cat
+if which bat; then
+    alias cat='bat'
+fi
 
 # vim ts=4 sw=4 syn=sh :
-alias update-kubectl="curl -LO https://storage.googleapis.com/kubernetes-release/release/\$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x kubectl && mv kubectl ${HOME}/bin/"
