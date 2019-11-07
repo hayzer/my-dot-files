@@ -36,19 +36,22 @@ alias pj='python -mjson.tool'
 alias nst='netstat -tlupn|ack '
 alias env_update='curl -s -L http://bit.ly/1mq6AJr | bash -'
 alias gigraph='git log --graph --oneline'
-alias psa='ps aux|ag'
+alias psa='ps aux|rg'
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
+alias preview='fzf --preview="bat {} --color=always"'
+alias cat='bat'
 
 # Git 
 alias gist='git status'
 alias gici='git commit -v'
+alias gitree="git log --graph --abbrev-commit --decorate --date=relative --format=format:'\''%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'\' --all -n30"
 
 # k8s
 alias update-minikube="curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && chmod +x minikube && mv minikube ${HOME}/bin"
 alias update-kubectl="curl -LO https://storage.googleapis.com/kubernetes-release/release/\$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x kubectl && mv kubectl ${HOME}/bin/"
 
-# If bat installed, use it instead of the cat
-if which bat; then
-    alias cat='bat'
-fi
+# kops
+alias update-kops="wget -O kops https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '"' -f 4)/kops-linux-amd64 && chmod +x ./kops && mv ./kops ~/bin/"
 
 # vim ts=4 sw=4 syn=sh :
