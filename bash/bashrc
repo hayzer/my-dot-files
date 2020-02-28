@@ -39,10 +39,6 @@ if [ -f ~/.variables ]; then
 	. ~/.variables
 fi
 
-# Add-on for comfortable CouchDB command line
-if [ -f ~/test/resty ]; then
-	. ~/test/resty
-fi
 
 # Put your fun stuff here.
  if [ ${BASH_VERSINFO[0]} -lt 3 ]; then
