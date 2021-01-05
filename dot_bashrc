@@ -150,4 +150,4 @@ source ~/.dotbare/dotbare.plugin.bash
 if [ -f ~/.variables ]; then
     source ~/.variables
 fi
-export PATH=${PATH}:~/bin
+export PATH=${PATH}:~/bin:~/.arkade/bin
