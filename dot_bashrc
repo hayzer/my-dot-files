@@ -145,9 +145,13 @@ ex ()
 # end of the original bashrc
 
 # customizations
-source ~/.dotbare/dotbare.plugin.bash
+# source ~/.dotbare/dotbare.plugin.bash
 
 test -f ~/.variables && source ~/.variables
 test -f ~/.aliases && source ~/.aliases
+if [ -f ~/.bash-git-prompt/gitprompt.sh ];then
+    GIT_PROMPT_ONLY_IN_REPO=1
+    source ~/.bash-git-prompt/gitprompt.sh
+fi
 
 export PATH=${PATH}:~/bin:~/.arkade/bin
