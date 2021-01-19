@@ -147,7 +147,7 @@ ex ()
 # customizations
 source ~/.dotbare/dotbare.plugin.bash
 
-if [ -f ~/.variables ]; then
-    source ~/.variables
-fi
+test -f ~/.variables && source ~/.variables
+test -f ~/.aliases && source ~/.aliases
+
 export PATH=${PATH}:~/bin:~/.arkade/bin
