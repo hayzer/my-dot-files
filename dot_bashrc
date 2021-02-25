@@ -154,4 +154,4 @@ if [ -f ~/.bash-git-prompt/gitprompt.sh ];then
     source ~/.bash-git-prompt/gitprompt.sh
 fi
 
-export PATH=${PATH}:~/bin:~/.arkade/bin
+export PATH=${PATH}:~/bin:~/.arkade/bin:~/.krew/bin
