@@ -1,19 +1,2 @@
-### Install procedure
-
-#### Prerequisites
-
-* sudo dnf install perl-CPAN
-* sudo dnf install bash-completion
-
-#### Installation
-
-```bash
-  # curl -s -L http://bit.ly/1mq6AJr | bash -
-```
-
----
-BE AWARE: Using 'curl | bash' style of installation can be potentially
-          dangerous to your system..
----
-
-#### Restart bash
+### 
+Follow: https://github.com/twpayne/chezmoi/blob/master/docs/QUICKSTART.md
